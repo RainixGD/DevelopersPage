@@ -1,0 +1,67 @@
+[
+	{
+        "name": "RainixGD",
+        "role": "Admin",
+        "logo": "dev1.png",
+        "buttons": [
+            {
+                "texture": "br.png",
+                "link": "https://google.com"
+            },
+            {
+                "texture": "ds.png",
+                "link": "https://discord.com"
+            },
+            {
+                "texture": "yt.png",
+                "link": "https://youtube.com"
+            }
+        ]
+    },
+    {
+        "name": "ABOBUS",
+        "role": "helper",
+        "logo": "dev2.png",
+        "buttons": [
+            {
+                "texture": "br.png",
+                "link": "https://google.com"
+            },
+            {
+                "texture": "ins.png",
+                "link": "https://instagram.com"
+            },
+            {
+                "texture": "yt.png",
+                "link": "https://youtube.com"
+            }
+        ]
+    },
+    {
+        "name": "RobTop",
+        "role": "Coder",
+        "logo": "dev3.png",
+        "buttons": [
+            {
+                "texture": "tch.png",
+                "link": "https://twitch.com"
+            },
+            {
+                "texture": "vk.png",
+                "link": "https://vk.com"
+            },
+            {
+                "texture": "yt.png",
+                "link": "https://gdrainix.xyz"
+            },
+            {
+                "texture": "yt.png",
+                "link": "https://gdrainix.xyz"
+            },
+            {
+                "texture": "yt.png",
+                "link": "https://gdrainix.xyz"
+            }
+        ]
+    }
+]

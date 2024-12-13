@@ -1,0 +1,12 @@
+[submodule "libraries/cocos-headers"]
+	path = libraries/cocos-headers
+	url = https://github.com/RainixGD/cocos-headers-2.11.git
+[submodule "libraries/gd.h"]
+	path = libraries/gd.h
+	url = https://github.com/RainixGD/gd.h-2.11.git
+[submodule "libraries/minhook"]
+	path = libraries/minhook
+	url = https://github.com/RainixGD/minhook.git
+[submodule "libraries/json"]
+	path = libraries/json
+	url = https://github.com/nlohmann/json.git
