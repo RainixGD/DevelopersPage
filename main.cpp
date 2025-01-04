@@ -45,6 +45,7 @@ class DeveloperNode : public CCNode {
 			auto socialNetworkBtnSprite = CCSprite::create(socialNetwork->texture.c_str());
 			if (socialNetworkBtnSprite == NULL)
 				socialNetworkBtnSprite = CCSprite::createWithSpriteFrameName("GJ_deleteIcon_001.png");
+			socialNetworkBtnSprite->setContentSize({ 30.5, 30.5 });
 			auto devBtn = SocialNetworkButton::create(socialNetworkBtnSprite, socialNetwork->link);
 			menu->addChild(devBtn);
 		}
@@ -149,7 +150,8 @@ class DevelopersPageManager {
 		OK,
 		FileNotFound,
 		ParsingError,
-		TooManyButtons
+		TooManyButtons,
+		InvalidUrl
 	};
 
 	std::vector<DeveloperData*> data;
@@ -158,6 +160,11 @@ class DevelopersPageManager {
 
 	void init() {
 		loadingStatus = loadData();
+	}
+
+	bool isValidURL(const std::string& url) {
+		std::regex url_regex(R"(^https?://)");
+		return std::regex_search(url, url_regex);
 	}
 
 	DataLoadingResult loadData() {
@@ -188,6 +195,8 @@ class DevelopersPageManager {
 
 				auto buttons = developer["buttons"];
 
+				if (buttons.size() > 6) return TooManyButtons;
+
 				for (auto btn : buttons) {
 					if (!btn.contains("texture") || !btn["texture"].is_string()
 						|| !btn.contains("link") || !btn["link"].is_string()) return ParsingError;
@@ -195,6 +204,7 @@ class DevelopersPageManager {
 					auto socialNetworkData = new DeveloperSocialNetworkData;
 					socialNetworkData->texture = btn["texture"];
 					socialNetworkData->link = btn["link"];
+					if (!isValidURL(socialNetworkData->link)) return InvalidUrl;
 
 					developerData->socialNetworks.push_back(socialNetworkData);
 				}
@@ -220,14 +230,17 @@ public:
 
 			std::string errorText;
 			switch (loadingStatus) {
-			case DevelopersPageManager::FileNotFound:
+			case FileNotFound:
 				errorText = "Can't find 'devPanel.json' in ./Resources";
 				break;
-			case DevelopersPageManager::ParsingError:
+			case ParsingError:
 				errorText = "Can't parse 'devPanel.json'";
 				break;
-			case DevelopersPageManager::TooManyButtons:
+			case TooManyButtons:
 				errorText = "Too many buttons in 'devPanel.json'";
+				break;
+			case InvalidUrl:
+				errorText = "Links for buttons should start with 'http://' or 'https://' in 'devPanel.json'";
 				break;
 			}
 
